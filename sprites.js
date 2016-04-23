@@ -14,16 +14,14 @@
         x: 600
       , y: 500
       , draw: G.art.drawMagnesium
-      , fadeRate: U.units( 12 ).per.second
+      , fadeRate: U.units( 20 ).per.second
       , getNextSprite: function(avoid) {
             var mags = G.art.magnesia.length;
             return (avoid + 1) % mags;
-            /*
             // Avoid the same sprite
             var ret = Math.floor( Math.random() * (mags-1) );
             if (ret >= avoid) ++ret;
             return ret;
-            */
         }
       , initSprite: function() {
             var mags = G.art.magnesia.length;

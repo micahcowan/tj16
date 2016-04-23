@@ -36,9 +36,11 @@
         var cam = G.state.camera;
         var x = cam.toCamX(this.x) - img1.width/2;
         var y = cam.toCamY(this.y) - img1.height/2;
+        /*
         s.globalAlpha = 1 - this.fadeAmt;
         s.drawImage(img1, x, y);
         s.globalAlpha = this.fadeAmt;
+        */
         s.drawImage(img2, x, y);
         s.globalAlpha = 1;
     };
