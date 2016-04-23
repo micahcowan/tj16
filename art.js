@@ -34,14 +34,18 @@
         var img1 = G.queue.getResult( A.magnesia[this.curSprite] );
         var img2 = G.queue.getResult( A.magnesia[this.nextSprite] );
         var cam = G.state.camera;
-        var x = cam.toCamX(this.x) - img1.width/2;
-        var y = cam.toCamY(this.y) - img1.height/2;
+        var w = img1.width;
+        var h = img1.height;
+        w/=2;
+        h/=2;
+        var x = cam.toCamX(this.x) - w/2;
+        var y = cam.toCamY(this.y) - h/2;
         /*
         s.globalAlpha = 1 - this.fadeAmt;
         s.drawImage(img1, x, y);
         s.globalAlpha = this.fadeAmt;
         */
-        s.drawImage(img2, x, y);
+        s.drawImage(img2, x, y, w, h);
         s.globalAlpha = 1;
     };
 })();

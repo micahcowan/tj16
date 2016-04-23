@@ -2,7 +2,7 @@
 
 addEventListener('load', function(){
     var G = (window.FireGame = window.FireGame || {});
-    var MG = G.mg = G.game = new MajicGame(document.getElementById('game'));
+    var MG = G.gm = G.game = new MajicGame(document.getElementById('game'));
     var U = MajicUnits;
     G.soundPlayer = function(name) {
         return createjs.Sound.play.bind(createjs.Sound, name);
