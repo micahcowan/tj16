@@ -14,12 +14,17 @@ addEventListener('load', function(){
         S.area = {
             w: U.pixels( 1200 ).relax()
           , h: U.pixels( 1000 ).relax()
-        }
-        S.camera = new G.Camera(S.area.w.div(2), S.area.h.div(2));
+        };
+        S.center = {
+            x: S.area.w.div(2).relax()
+          , y: S.area.h.div(2).relax()
+        };
+        S.camera = new G.Camera(S.center.x, S.center.y);
         S.background = new Sp.Background;
         MG.resetSprites(
             S.camera
           , S.background
+          , new Sp.Magnesium(S.center.x, S.center.y)
         );
     }
 

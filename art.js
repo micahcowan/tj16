@@ -3,10 +3,19 @@
 (function(){
     var G = (window.FireGame = window.FireGame || {});
     var U = MajicUnits;
-    G.art = {};
+    var A = G.art = {};
 
     G.art.load = function(q) {
-        q.loadFile({id: 'bkgnd', src: 'images/background.png'});
+        var manifest = [
+            {id: 'bkgnd', src: 'images/background.png'}
+        ];
+        G.art.magnesia = [];
+        for (var i=0; i<6; ++i) {
+            G.art.magnesia.push('images/magnesium0' + (i+1) + '.png');
+        }
+        manifest = manifest.concat(G.art.magnesia);
+
+        q.loadManifest(manifest);
     };
 
     // NOTE: In all the draw*() functions below, "this" refers to
@@ -19,5 +28,18 @@
         var w = G.game.width;
         var h = G.game.height;
         s.drawImage( img, tl.x, tl.y, w, h, 0, 0, w, h);
+    };
+
+    G.art.drawMagnesium = function(s) {
+        var img1 = G.queue.getResult( A.magnesia[this.curSprite] );
+        var img2 = G.queue.getResult( A.magnesia[this.nextSprite] );
+        var cam = G.state.camera;
+        var x = cam.toCamX(this.x) - img1.width/2;
+        var y = cam.toCamY(this.y) - img1.height/2;
+        s.globalAlpha = 1 - this.fadeAmt;
+        s.drawImage(img1, x, y);
+        s.globalAlpha = this.fadeAmt;
+        s.drawImage(img2, x, y);
+        s.globalAlpha = 1;
     };
 })();
