@@ -65,7 +65,7 @@ var MajicUnits = (function() {
             if (value < 0) {
                 value = 2 * Math.PI + (value % (2 * Math.PI));
             }
-            else {
+            else if (value != (2 * Math.PI)) {
                 value = value % (2 * Math.PI);
             }
         }
