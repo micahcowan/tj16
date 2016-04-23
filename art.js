@@ -6,7 +6,7 @@
     G.art = {};
 
     G.art.load = function(q) {
-        q.loadFile({id: 'bkgnd', src: 'background.png'});
+        q.loadFile({id: 'bkgnd', src: 'images/background.png'});
     };
 
     // NOTE: In all the draw*() functions below, "this" refers to
