@@ -14,6 +14,10 @@
     // surrounding context.
 
     G.art.drawBackground = function(s) {
-        s.drawImage( G.queue.getResult('bkgnd'), 0, 0 );
+        var img = G.queue.getResult('bkgnd');
+        var tl = G.state.camera.getTL();
+        var w = G.game.width;
+        var h = G.game.height;
+        s.drawImage( img, tl.x, tl.y, w, h, 0, 0, w, h);
     };
 })();
