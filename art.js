@@ -9,11 +9,18 @@
         var manifest = [
             {id: 'bkgnd', src: 'images/background.png'}
         ];
+
         G.art.magnesia = [];
-        for (var i=0; i<6; ++i) {
-            G.art.magnesia.push('images/magnesium0' + (i+1) + '.png');
+        for (var i=1; i<=6; ++i) {
+            G.art.magnesia.push('images/magnesium0' + i + '.png');
         }
         manifest = manifest.concat(G.art.magnesia);
+
+        G.art.infantry = [];
+        for (var i=1; i<=18; ++i) {
+            G.art.infantry.push('images/infantry' + (i<10? '0' : '') + i + '.png');
+        }
+        manifest = manifest.concat(G.art.infantry);
 
         q.loadManifest(manifest);
     };
@@ -34,10 +41,8 @@
         var img1 = G.queue.getResult( this.spriteFrames[this.curSprite] );
         var img2 = G.queue.getResult( this.spriteFrames[this.nextSprite] );
         var cam = G.state.camera;
-        var w = img1.width;
-        var h = img1.height;
-        w/=2;
-        h/=2;
+        var w = img1.width * (this.scale? this.scale : 1);
+        var h = img1.height * (this.scale? this.scale : 1);
         var x = cam.toCamX(this.x) - w/2;
         var y = cam.toCamY(this.y) - h/2;
         // Actual fading isn't working (need to blend two images

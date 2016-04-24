@@ -30,6 +30,17 @@ addEventListener('load', function(){
                 x: S.center.x
               , y: S.center.y
               , spriteFrames: G.art.magnesia
+              , scale: 0.5
+            })
+            // Infantry:
+          , new Sp.Floater({
+                x: S.center.x.add( U.pixels( 100 ) )
+              , y: S.center.y.add( U.pixels( 200 ) )
+              , revolveTime: U.seconds(15)
+              , spriteFrames: G.art.infantry
+              , scale: 0.12
+              , hRadius: U.pixels( 50 )
+              , randomSpriteFrames: true
             })
           , S.player
         );
