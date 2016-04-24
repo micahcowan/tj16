@@ -22,6 +22,12 @@
         }
         manifest = manifest.concat(G.art.infantry);
 
+        G.art.sparky = [];
+        for (var i=1; i<=18; ++i) {
+            G.art.sparky.push('images/sparky_fire_' + (i<10? '0' : '') + i + '.png');
+        }
+        manifest = manifest.concat(G.art.sparky);
+
         q.loadManifest(manifest);
     };
 

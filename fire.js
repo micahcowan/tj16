@@ -42,11 +42,22 @@ addEventListener('load', function(){
               , hRadius: U.pixels( 50 )
               , randomSpriteFrames: false
             })
+          , new Sp.Floater({
+                x: S.center.x.sub( U.pixels( 100 ) )
+              , y: S.center.y.add( U.pixels( 200 ) )
+              , revolveTime: U.seconds(30)
+              , spriteFrames: G.art.sparky
+              , scale: 0.12
+              , hRadius: U.pixels( 50 )
+              , randomSpriteFrames: false
+            })
+            // Sparky:
           , S.player
         );
     }
 
     var queue = G.queue = new createjs.LoadQueue();
     queue.on('complete', function() { newGame(); MG.start(); });
+    //queue.on('fileerror', function(e){  console.log("error: " + e.toString()); debugger; })
     G.art.load(queue);
 })
