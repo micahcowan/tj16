@@ -338,15 +338,15 @@ var MajicGame = (function() {
             }
       , bouncingBounds:
             // FIXME: Make this use bounds (above) as the basis
-            function(left, top, right, bottom, cb) {
+            function(rect, cb) {
                 return function(delta) {
                     var bouncing = false;
                     var x = this.x.as( U.pixel );
                     var y = this.y.as( U.pixel );
-                    var l = left.as( U.pixel );
-                    var t = top.as( U.pixel );
-                    var r = right.as( U.pixel );
-                    var b = bottom.as( U.pixel );
+                    var l = rect.l.as( U.pixel );
+                    var t = rect.t.as( U.pixel );
+                    var r = rect.r.as( U.pixel );
+                    var b = rect.b.as( U.pixel );
                     var newX = this.x;
                     var newY = this.y;
                     var newH = this.h;

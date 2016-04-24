@@ -10,8 +10,8 @@
     // G.areaRect: "smart" global object that acts as a proxy for the
     // area rect in the current state object.
     G.areaRect = {
-        t: 0
-      , l: 0
+        t: U.pixels( 0 ).relax()
+      , l: U.pixels( 0 ).relax()
       , get b() {
             return G.state.area.h;
         }
@@ -290,8 +290,10 @@
         return okay[ Math.floor( Math.random() * okay.length ) ];
     }
     GBh.spawning = function(delta) {
-        if (this.spriteCollection === undefined
-            || this.spriteCollection.length < this.max) {
+        if ((this.spriteCollection === undefined
+            || this.spriteCollection.length < this.max)
+            && this.pool.length != 0) {
+
             if (this.deathTime === undefined) {
                 this.deathTime = G.game.timeElapsed;
             }
@@ -299,10 +301,14 @@
                     .sub( this.deathTime )
                     .sub( this.spawnWait ).as( U.seconds )
                 > 0) {
+
+                this.deathTime = undefined;
+
                 // Spawn a baddie;
-                var badClass = this.pool.pop();
+                var badClass = this.pool.shift();
                 var spawner = getSpawnerForType.call(this, badClass);
                 var baddie = new badClass({x: spawner.x, y: spawner.y});
+                baddie.spawn();
                 var self = (this.spriteCollection = this.spriteCollection || []);
                 baddie.onDie(function(b) {
                     for (var i=0; i != self.length; ++i) {

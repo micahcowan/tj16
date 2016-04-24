@@ -166,5 +166,11 @@
     G.art.drawSpawner = function(s) {
         if (this.gfx)
             drawImageAt(this, s, this.gfx);
+        else if (false) {
+            s.beginPath();
+            var cam = G.state.camera;
+            s.arc(cam.toCamX(this.x), cam.toCamY(this.y), 50, 0, 2*Math.PI);
+            s.fill();
+        }
     };
 })();

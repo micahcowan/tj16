@@ -39,12 +39,9 @@ addEventListener('load', function(){
             max: 1
           , spawnWait: U.seconds( 4 )
           , pool: [
-                Sp.Magnesium
-            /*
                 Sp.Infantry
               , Sp.Magnesium
               , Sp.GreaseFire
-              */
             ]
         })
         MG.resetSprites(

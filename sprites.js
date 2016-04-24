@@ -12,12 +12,12 @@
         draw: G.art.drawBackground
     });
 
+    var aR = G.areaRect;
+
     sprites.Floater = MG.makeSpriteClass({
         x: U.pixels( 600 ).relax()
       , y: U.pixels( 500 ).relax()
-      , revolveTime: U.seconds( 8 )
-      , hRadius: U.pixels( 200 )
-      , vRadius: U.pixels( 50 )
+      , speed: U.pixels( 100 ).per.second
       , draw: G.art.drawFloater
       , fadeRate: U.units( 20 ).per.second
       , initSprite: function(obj) {
@@ -25,19 +25,38 @@
             this.cX = this.x;
             this.cY = this.y;
         }
+      , spawn: function() {
+            // Point at player
+            var p = G.state.player;
+            var rot = Math.atan2(p.x - this.x, p.y - this.y);
+            this.h = this.speed.mul( Math.sin(rot) );
+            this.v = this.speed.mul( Math.cos(rot) );
+        }
       , onDie: function(handler) {
             this.deathListeners = this.deathListeners || [];
             this.deathListeners.push(handler);
         }
       , behavior: [
             GBh.fadeSpriteFrames
-          , GBh.pace
+          //, GBh.pace
+          , Bh.momentum
+          , Bh.bouncingBounds(aR)
         ]
     });
 
     sprites.Magnesium = MG.makeSpriteClass({
         spriteFrames: 'magnesia'
       , fadeRate: U.units( 15 ).per.second
+    }, sprites.Floater);
+
+    sprites.Infantry = MG.makeSpriteClass({
+        spriteFrames: 'infantry'
+      , fadeRate: U.units( 10 ).per.second
+    }, sprites.Floater);
+
+    sprites.GreaseFire = MG.makeSpriteClass({
+        spriteFrames: 'sparky'
+      , fadeRate: U.units( 10 ).per.second
     }, sprites.Floater);
 
     sprites.Player = MG.makeSpriteClass({
@@ -120,9 +139,26 @@
     sprites.SpawnPoints = MG.makeSpriteClass({
         draw: G.art.drawSpawnPoints
       , spawners: [
+            // Infantry
             new sprites.Spawner({
-                x: U.pixels( 600 ).relax()
+                x: U.pixels( 300 ).relax()
               , y: U.pixels( 500 ).relax()
+              , spawnClass: sprites.Infantry
+              //, gfx: 'lab'
+              //, scale: 0.4
+            })
+            // GreaseFire
+          , new sprites.Spawner({
+                x: U.pixels( 600 ).relax()
+              , y: U.pixels( 700 ).relax()
+              , spawnClass: sprites.GreaseFire
+              //, gfx: 'lab'
+              //, scale: 0.4
+            })
+            // Magnesium
+          , new sprites.Spawner({
+                x: U.pixels( 850 ).relax()
+              , y: U.pixels( 300 ).relax()
               , spawnClass: sprites.Magnesium
               , gfx: 'lab'
               , scale: 0.4
