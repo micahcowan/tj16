@@ -21,10 +21,12 @@ addEventListener('load', function(){
         };
         S.camera = new G.Camera(S.center.x, S.center.y);
         S.background = new Sp.Background;
+        S.player = new Sp.Player({x: S.center.x, y: S.center.y});
         MG.resetSprites(
             S.camera
           , S.background
           , new Sp.Magnesium(S.center.x, S.center.y)
+          , S.player
         );
     }
 

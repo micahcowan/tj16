@@ -269,7 +269,66 @@ var MajicGame = (function() {
                     }
                 };
             }
+      , boundsStop:
+            function(rect) {
+                function handler(exceed) {
+                    this.x = this.x.add( exceed.x ).relax();
+                    this.y = this.y.add( exceed.y ).relax();
+                    if (exceed.x != 0)
+                        this.h = U.pixels( 0 ).per.second.relax();
+                    if (exceed.y != 0)
+                        this.y = U.pixels( 0 ).per.second.relax();
+                }
+                return MajicGame.behavior.bounds(rect, handler);
+            }
+      , bounds:
+            function(rect, handler) {
+                var _pos;
+                var rr = 0;
+                var hh = 1;
+                if (arguments.length > 2) {
+                    ++rr; ++hh;
+                    _pos = arguments[0];
+                }
+                var rect = arguments[rr];
+                var handler = arguments[hh];
+
+                return function() {
+                    var ret = {
+                        x: U.pixels( 0 ).relax(),
+                        y: U.pixels( 0 ).relax()
+                    };
+                    var pos = (_pos === undefined)? this : _pos;
+                    var t = rect.t;
+                    var l = rect.l;
+                    var b = (rect.b === undefined)?
+                        rect.t + rect.h : rect.b;
+                    var r = (rect.r === undefined)?
+                        rect.r + rect.w : rect.r;
+                    var x = pos.x.relax();
+                    var y = pos.y.relax();
+
+                    if (x < l) {
+                        ret.x = U.pixels( l - x ).relax();
+                    }
+                    else if (x > r) {
+                        ret.x = U.pixels( r - x ).relax();
+                    }
+
+                    if (y < t) {
+                        ret.y = U.pixels( t - y ).relax();
+                    }
+                    else if (y > b) {
+                        ret.y = U.pixels( b - y ).relax();
+                    }
+
+                    if (ret.x != 0 || ret.y != 0) {
+                        handler.call(this, ret);
+                    }
+                }
+            }
       , bouncingBounds:
+            // FIXME: Make this use bounds (above) as the basis
             function(left, top, right, bottom, cb) {
                 return function(delta) {
                     var bouncing = false;

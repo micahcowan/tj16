@@ -48,4 +48,16 @@
         s.drawImage(img2, x, y, w, h);
         s.globalAlpha = 1;
     };
+
+    G.art.drawPlayer = function(s) {
+        var cam = G.state.camera;
+        s.save();
+        s.translate( cam.toCamX(this.x), cam.toCamY(this.y) );
+        var w = this.width;
+        var h = this.height;
+        s.fillStyle = 'green';
+        s.fillRect(-w/2, -h/2, w, h);
+        s.strokeRect(-w/2, -h/2, w, h);
+        s.restore();
+    }
 })();
