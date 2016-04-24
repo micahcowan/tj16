@@ -35,14 +35,28 @@ addEventListener('load', function(){
         S.background = new Sp.Background;
         S.player = new Sp.Player({x: S.center.x, y: S.center.y});
         S.selector = new Sp.DeviceSelector;
+        S.spawning = new Sp.SpawnPoints({
+            max: 1
+          , spawnWait: U.seconds( 4 )
+          , pool: [
+                Sp.Magnesium
+            /*
+                Sp.Infantry
+              , Sp.Magnesium
+              , Sp.GreaseFire
+              */
+            ]
+        })
         MG.resetSprites(
             S.camera
           , S.background
+          , S.spawning
+          /*
             // Magnesium:
           , new Sp.Floater({
                 x: S.center.x
               , y: S.center.y
-              , spriteFrames: G.art.magnesia
+              , spriteFrames: 'magnesia'
               , fadeRate: U.units( 15 ).per.second
               //, scale: 0.5
             })
@@ -51,7 +65,7 @@ addEventListener('load', function(){
                 x: S.center.x.add( U.pixels( 100 ) )
               , y: S.center.y.add( U.pixels( 200 ) )
               , revolveTime: U.seconds(15)
-              , spriteFrames: G.art.infantry
+              , spriteFrames: 'infantry'
               , fadeRate: U.units( 10 ).per.second
               //, scale: 0.12
               , hRadius: U.pixels( 50 )
@@ -63,11 +77,11 @@ addEventListener('load', function(){
               , y: S.center.y.add( U.pixels( 200 ) )
               , revolveTime: U.seconds(30)
               , fadeRate: U.units( 10 ).per.second
-              , spriteFrames: G.art.sparky
+              , spriteFrames: 'sparky'
               //, scale: 0.12
               , hRadius: U.pixels( 50 )
               , randomSpriteFrames: false
-            })
+            }) */
           , S.player
           , S.selector
         );

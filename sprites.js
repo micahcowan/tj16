@@ -24,13 +24,17 @@
             this.mergeData(obj);
             this.cX = this.x;
             this.cY = this.y;
-            this.numSpriteFrames = this.spriteFrames.length;
         }
       , behavior: [
             GBh.fadeSpriteFrames
           , GBh.pace
         ]
     });
+
+    sprites.Magnesium = MG.makeSpriteClass({
+        spriteFrames: 'magensia'
+      , fadeRate: U.units( 15 ).per.second
+    }, sprites.Floater);
 
     sprites.Player = MG.makeSpriteClass({
         height: 80
@@ -99,6 +103,28 @@
       , selected: 0
       , behavior: [
             GBh.selectKey('Tab')
+        ]
+    });
+
+    sprites.Spawner = MG.makeSpriteClass({
+        draw: G.art.drawSpawner
+      , handles: function(classIn) {
+            return (classIn == this.spawnClass);
+        }
+    });
+
+    sprites.SpawnPoints = MG.makeSpriteClass({
+        draw: G.art.drawSpawnPoints
+      , spawners: [
+            new sprites.Spawner({
+                x: 600
+              , y: 500
+              , spawnClass: sprites.Magnesium
+              , gfx: 'lab'
+            })
+        ]
+      , behavior: [
+            GBh.spawning
         ]
     });
 })();

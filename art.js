@@ -11,6 +11,7 @@
           , {id: 'dev:water', src: 'images/extinguisher_water_and_foam.png'}
           , {id: 'dev:powder', src: 'images/extinguisher_dry_powder.png'}
           , {id: 'dev:chem', src: 'images/extinguisher_dry_chemical.png'}
+          , {id: 'lab', src: 'images/laboratory_post.png'}
         ];
 
         G.art.magnesia = [];
@@ -58,7 +59,8 @@
     };
 
     G.art.drawFloater = function(s) {
-        drawImageAt(this, s, this.spriteFrames[this.nextSprite]);
+        var frames = G.art[this.spriteFrames];
+        drawImageAt(this, s, frames[this.nextSprite]);
     };
 
     G.art.drawPlayer = function(s) {
@@ -150,5 +152,17 @@
         }
 
         s.globalAlpha = 1;
-    }
+    };
+
+    G.art.drawSpawnPoints = function(s) {
+        var spawners = this.spawners;
+        for (var i=0; i != spawners.length; ++i) {
+            spawners[i].draw(s);
+        }
+    };
+
+    G.art.drawSpawner = function(s) {
+        if (this.gfx)
+            drawImageAt(this, s, this.gfx);
+    };
 })();

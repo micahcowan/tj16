@@ -56,6 +56,9 @@ var MajicGame = (function() {
                 else if (thing instanceof Array) {
                     game.drawAll(thing);
                 }
+                else if (thing.spriteCollection instanceof Array) {
+                    game.drawAll(spriteCollection);
+                }
             });
         };
 
@@ -64,6 +67,10 @@ var MajicGame = (function() {
                 b.forEach(processBehavior.bind(undefined, thing, delta));
             else
                 b.call(thing, delta.mul(1));
+
+            if (b.spriteCollection instanceof Array)
+                b.spriteCollection.forEach(processBehavior.bind(undefined, thing, delta));
+
         };
         this.behaveAll = function(delta, behavable) {
             var game = this;

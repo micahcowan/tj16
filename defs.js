@@ -185,7 +185,7 @@
 
     // (not a behavior, util function for fadeSpriteFrames)
     function getNextSprite() {
-        var len = this.numSpriteFrames;
+        var len = G.art[this.spriteFrames].length;
         if (false && !this.randomSpriteFrames)
             return (this.curSprite + 1) % len;
         else {
@@ -199,9 +199,11 @@
     // (not a behavior, util function for fadeSpriteFrames)
     function shuffleFrames() {
         var list = [];
-        for (var i=0; i < this.numSpriteFrames; ++i) {
+        try{
+        for (var i=0; i < G.art[this.spriteFrames].length;  ++i) {
             list.push(i);
         }
+        } catch (e) { debugger; }
         // shuffle
         this.shuffledFrames = [];
         while (list.length > 0) {
@@ -214,7 +216,7 @@
         }
     }
     
-    // Requires: numSpriteFrames
+    // Requires: 
     //           fadeRate
     // Optional: randomSpriteFrames
     GBh.fadeSpriteFrames = function(delta) {
@@ -276,5 +278,42 @@
         };
         retval.destroy = mk.destroy.bind(mk);
         return retval;
+    };
+
+    function getSpawnerForType(badClass) {
+        var spawners = this.spawners;
+        var okay = [];
+        for (var i=0; i != spawners.length; ++i) {
+            var s = spawners[i];
+            if (s.handles(badClass)) {
+                okay.push(s);
+            }
+        }
+        return okay[ Math.floor( Math.random() * okay.length ) ];
     }
+    GBh.spawning = function(delta) {
+        if (this.length < this.max) {
+            if (this.deathTime === undefined) {
+                this.deathTime = G.game.timeElapsed;
+            }
+            if (G.game.timeElapsed
+                    .sub( this.deathTime )
+                    .sub( this.spawnWait ).as( U.seconds )
+                > 0) {
+                // Spawn a baddie;
+                var badClass = this.pool.pop();
+                var spawner = getSpawnerForType.call(this, badClass);
+                var baddie = new badClass({x: spawner.x, y: spawner.y});
+                var self = (this.spriteCollection = this.spriteCollection || []);
+                baddie.onDie(function(b) {
+                    for (var i=0; i != self.length; ++i) {
+                        if (self[i] === b) {
+                            self.splice(i, 1);
+                        }
+                    }
+                });
+                this.spriteCollection.push(baddie);
+            }
+        }
+    };
 })();
