@@ -243,6 +243,8 @@
         var rad = revolveRate.mul( G.gm.timeElapsed ) * Math.PI*2;
         this.x = this.cX.add(this.hRadius.mul( Math.sin(rad) ));
         this.y = this.cY.add(this.vRadius.mul( Math.cos(rad) ));
-      }
+    };
 
+    GBh.particleFade = function(delta) {
+    };
 })();
