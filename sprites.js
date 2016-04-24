@@ -171,7 +171,7 @@
             this.mergeData(obj);
 
             var mk = new MajicKeys;
-            mk.onDown('\\b', handler);
+            mk.onDown('\b', handler);
             mk.onDown('Backspace', handler);
             var self = this;
             function handler() {
