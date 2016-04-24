@@ -167,5 +167,17 @@
       , behavior: [
             GBh.spawning
         ]
+      , initSprite(obj) {
+            this.mergeData(obj);
+
+            var mk = new MajicKeys;
+            mk.onDown('\b', handler);
+            var self = this;
+            function handler() {
+                if (self.spriteCollection && self.spriteCollection.length != 0) {
+                    self.spriteCollection.shift();
+                }
+            }
+        }
     });
 })();
