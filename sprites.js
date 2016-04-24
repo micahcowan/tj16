@@ -71,10 +71,10 @@
                 , left: ['a', 'ArrowLeft']
                 , right: ['d', 'ArrowRight']
                 }
-              , U.pixels( 300 ).per.second.per.second
+              , U.pixels( 1200 ).per.second.per.second
             )
-          , Bh.friction(  U.pixels( 100 ).per.second.per.second  )
-          , Bh.speedLimited( U.pixels( 240 ).per.second )
+          , Bh.friction(  U.pixels( 440 ).per.second.per.second  )
+          , Bh.speedLimited( U.pixels( 260 ).per.second )
         ]
       , initSprite: function(config) {
             this.mergeData(config);
