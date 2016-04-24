@@ -5,6 +5,7 @@
     var U = MajicUnits;
     var MG = MajicGame;
     var Bh = MG.behavior;
+    var GBh = G.behavior;
 
     // G.areaRect: "smart" global object that acts as a proxy for the
     // area rect in the current state object.
@@ -178,4 +179,49 @@
         ];
     };
     G.Camera.prototype = MG.spritePrototype;
+
+    // Behaviors
+    var GBh = G.behavior = {};
+
+    // (not a behavior, util function for fadeSpriteFrames)
+    function getNextSprite() {
+        var len = this.numSpriteFrames;
+        if (!this.randomSpriteFrames)
+            return (this.curSprite + 1) % len;
+        else {
+            // Avoid the same sprite
+            var ret = Math.floor( Math.random() * (len-1) );
+            if (ret >= this.curSprite) ++ret;
+            return ret;
+        }
+    }
+    
+    // Requires: numSpriteFrames
+    //           fadeRate
+    // Optional: randomSpriteFrames
+    GBh.fadeSpriteFrames = function(delta) {
+        // init
+        if (!('fadeAmt' in this)) {
+            this.fadeAmt = U.units( 0 ).relax();
+            this.curSprite = Math.floor( Math.random() * this.numSpriteFrames );
+            this.nextSprite = getNextSprite.call(this);
+        }
+        this.fadeAmt = this.fadeAmt.add( this.fadeRate.mul(delta) ).relax();
+        if (this.fadeAmt > 1) {
+            this.fadeAmt = U.units( 0 ).relax();
+            this.curSprite = this.nextSprite;
+            this.nextSprite = getNextSprite.call(this);
+        }
+    };
+
+    // Requires: revolveTime
+    //           hRadius
+    //           vRadius
+    GBh.pace = function(delta) {
+        var revolveRate = this.revolveTime.inverse;
+        var rad = revolveRate.mul( G.gm.timeElapsed ) * Math.PI*2;
+        this.x = this.cX.add(this.hRadius.mul( Math.sin(rad) ));
+        this.y = this.cY.add(this.vRadius.mul( Math.cos(rad) ));
+      }
+
 })();

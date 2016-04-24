@@ -30,9 +30,9 @@
         s.drawImage( img, tl.x, tl.y, w, h, 0, 0, w, h);
     };
 
-    G.art.drawMagnesium = function(s) {
-        var img1 = G.queue.getResult( A.magnesia[this.curSprite] );
-        var img2 = G.queue.getResult( A.magnesia[this.nextSprite] );
+    G.art.drawFloater = function(s) {
+        var img1 = G.queue.getResult( this.spriteFrames[this.curSprite] );
+        var img2 = G.queue.getResult( this.spriteFrames[this.nextSprite] );
         var cam = G.state.camera;
         var w = img1.width;
         var h = img1.height;
@@ -40,6 +40,9 @@
         h/=2;
         var x = cam.toCamX(this.x) - w/2;
         var y = cam.toCamY(this.y) - h/2;
+        // Actual fading isn't working (need to blend two images
+        // directly to get 100% opacity in the common points, can't do
+        // it this way)
         /*
         s.globalAlpha = 1 - this.fadeAmt;
         s.drawImage(img1, x, y);

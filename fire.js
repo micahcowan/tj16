@@ -25,7 +25,12 @@ addEventListener('load', function(){
         MG.resetSprites(
             S.camera
           , S.background
-          , new Sp.Magnesium(S.center.x, S.center.y)
+            // Magnesium:
+          , new Sp.Floater({
+                x: S.center.x
+              , y: S.center.y
+              , spriteFrames: G.art.magnesia
+            })
           , S.player
         );
     }
