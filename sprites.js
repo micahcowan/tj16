@@ -33,8 +33,8 @@
     });
 
     sprites.Player = MG.makeSpriteClass({
-        height: 65
-      , width: 50
+        height: 80
+      , width: 80
       , draw: G.art.drawPlayer
       , initSprite: function(config) {
             this.mergeData(config);
@@ -85,5 +85,5 @@
             Bh.momentum
           , GBh.particleFade
         ]
-    })
+    });
 })();

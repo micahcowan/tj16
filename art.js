@@ -8,6 +8,7 @@
     G.art.load = function(q) {
         var manifest = [
             {id: 'bkgnd', src: 'images/background.png'}
+          , {id: 'dev:water', src: 'images/extinguisher_water_and_foam.png'}
         ];
 
         G.art.magnesia = [];
@@ -31,6 +32,17 @@
         q.loadManifest(manifest);
     };
 
+    // Util fns
+    function drawImageAt(obj, s, tag) {
+        var img = G.queue.getResult( tag );
+        var cam = G.state.camera;
+        var w = img.width * (obj.scale? obj.scale : 1);
+        var h = img.height * (obj.scale? obj.scale : 1);
+        var x = cam.toCamX(obj.x) - w/2; var y = cam.toCamY(obj.y) - h/2; s.drawImage(img, x, y, w, h);
+    }
+
+
+    /**** Draw Functions ****/
     // NOTE: In all the draw*() functions below, "this" refers to
     // whatever object has adopted it as a method, and NOT the
     // surrounding context.
@@ -44,26 +56,11 @@
     };
 
     G.art.drawFloater = function(s) {
-        var img1 = G.queue.getResult( this.spriteFrames[this.curSprite] );
-        var img2 = G.queue.getResult( this.spriteFrames[this.nextSprite] );
-        var cam = G.state.camera;
-        var w = img1.width * (this.scale? this.scale : 1);
-        var h = img1.height * (this.scale? this.scale : 1);
-        var x = cam.toCamX(this.x) - w/2;
-        var y = cam.toCamY(this.y) - h/2;
-        // Actual fading isn't working (need to blend two images
-        // directly to get 100% opacity in the common points, can't do
-        // it this way)
-        /*
-        s.globalAlpha = 1 - this.fadeAmt;
-        s.drawImage(img1, x, y);
-        s.globalAlpha = this.fadeAmt;
-        */
-        s.drawImage(img2, x, y, w, h);
-        s.globalAlpha = 1;
+        drawImageAt(this, s, this.spriteFrames[this.nextSprite]);
     };
 
     G.art.drawPlayer = function(s) {
+        /*  Placeholder square:
         var cam = G.state.camera;
         s.save();
         s.translate( cam.toCamX(this.x), cam.toCamY(this.y) );
@@ -72,6 +69,8 @@
         s.fillStyle = 'green';
         s.fillRect(-w/2, -h/2, w, h);
         s.strokeRect(-w/2, -h/2, w, h);
-        s.restore();
+        s.restore(); */
+
+        drawImageAt(this, s, 'dev:water');
     }
 })();
