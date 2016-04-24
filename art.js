@@ -11,7 +11,7 @@
           , {id: 'dev:water', src: 'images/extinguisher_water_and_foam.png'}
           , {id: 'dev:powder', src: 'images/extinguisher_dry_powder.png'}
           , {id: 'dev:chem', src: 'images/extinguisher_dry_chemical.png'}
-          , {id: 'lab', src: 'images/laboratory_post.png'}
+          , {id: 'lab', src: 'images/laboratory.png'}
         ];
 
         G.art.magnesia = [];
@@ -39,7 +39,9 @@
     function drawImageAt(obj, s, tag) {
         var img = G.queue.getResult( tag );
         var cam = G.state.camera;
+        try {
         var w = img.width * (obj.scale? obj.scale : 1);
+        } catch(e) {debugger;}
         var h = img.height * (obj.scale? obj.scale : 1);
         var x = cam.toCamX(obj.x) - w/2; var y = cam.toCamY(obj.y) - h/2; s.drawImage(img, x, y, w, h);
     }

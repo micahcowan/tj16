@@ -13,8 +13,8 @@
     });
 
     sprites.Floater = MG.makeSpriteClass({
-        x: 600
-      , y: 500
+        x: U.pixels( 600 ).relax()
+      , y: U.pixels( 500 ).relax()
       , revolveTime: U.seconds( 8 )
       , hRadius: U.pixels( 200 )
       , vRadius: U.pixels( 50 )
@@ -25,6 +25,10 @@
             this.cX = this.x;
             this.cY = this.y;
         }
+      , onDie: function(handler) {
+            this.deathListeners = this.deathListeners || [];
+            this.deathListeners.push(handler);
+        }
       , behavior: [
             GBh.fadeSpriteFrames
           , GBh.pace
@@ -32,7 +36,7 @@
     });
 
     sprites.Magnesium = MG.makeSpriteClass({
-        spriteFrames: 'magensia'
+        spriteFrames: 'magnesia'
       , fadeRate: U.units( 15 ).per.second
     }, sprites.Floater);
 
@@ -117,10 +121,11 @@
         draw: G.art.drawSpawnPoints
       , spawners: [
             new sprites.Spawner({
-                x: 600
-              , y: 500
+                x: U.pixels( 600 ).relax()
+              , y: U.pixels( 500 ).relax()
               , spawnClass: sprites.Magnesium
               , gfx: 'lab'
+              , scale: 0.4
             })
         ]
       , behavior: [

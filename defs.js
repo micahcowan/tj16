@@ -199,11 +199,9 @@
     // (not a behavior, util function for fadeSpriteFrames)
     function shuffleFrames() {
         var list = [];
-        try{
         for (var i=0; i < G.art[this.spriteFrames].length;  ++i) {
             list.push(i);
         }
-        } catch (e) { debugger; }
         // shuffle
         this.shuffledFrames = [];
         while (list.length > 0) {
@@ -292,7 +290,8 @@
         return okay[ Math.floor( Math.random() * okay.length ) ];
     }
     GBh.spawning = function(delta) {
-        if (this.length < this.max) {
+        if (this.spriteCollection === undefined
+            || this.spriteCollection.length < this.max) {
             if (this.deathTime === undefined) {
                 this.deathTime = G.game.timeElapsed;
             }
