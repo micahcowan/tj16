@@ -177,6 +177,7 @@
             function handler() {
                 if (self.spriteCollection && self.spriteCollection.length != 0) {
                     self.spriteCollection.shift();
+                    createjs.Sound.play('fwoosh');
                 }
             }
         }
