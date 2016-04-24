@@ -12,6 +12,7 @@
           , {id: 'dev:powder', src: 'images/extinguisher_dry_powder.png'}
           , {id: 'dev:chem', src: 'images/extinguisher_dry_chemical.png'}
           , {id: 'lab', src: 'images/laboratory.png'}
+          , {id: 'kitchen', src: 'images/kitchen_post.png'}
         ];
 
         G.art.magnesia = [];

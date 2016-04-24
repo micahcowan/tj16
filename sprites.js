@@ -152,8 +152,8 @@
                 x: U.pixels( 600 ).relax()
               , y: U.pixels( 700 ).relax()
               , spawnClass: sprites.GreaseFire
-              //, gfx: 'lab'
-              //, scale: 0.4
+              , gfx: 'kitchen'
+              , scale: 0.4
             })
             // Magnesium
           , new sprites.Spawner({
