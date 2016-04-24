@@ -30,7 +30,7 @@ addEventListener('load', function(){
                 x: S.center.x
               , y: S.center.y
               , spriteFrames: G.art.magnesia
-              , scale: 0.5
+              //, scale: 0.5
             })
             // Infantry:
           , new Sp.Floater({
@@ -38,7 +38,7 @@ addEventListener('load', function(){
               , y: S.center.y.add( U.pixels( 200 ) )
               , revolveTime: U.seconds(15)
               , spriteFrames: G.art.infantry
-              , scale: 0.12
+              //, scale: 0.12
               , hRadius: U.pixels( 50 )
               , randomSpriteFrames: false
             })
@@ -47,7 +47,7 @@ addEventListener('load', function(){
               , y: S.center.y.add( U.pixels( 200 ) )
               , revolveTime: U.seconds(30)
               , spriteFrames: G.art.sparky
-              , scale: 0.12
+              //, scale: 0.12
               , hRadius: U.pixels( 50 )
               , randomSpriteFrames: false
             })
