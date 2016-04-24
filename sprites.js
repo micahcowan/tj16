@@ -92,9 +92,9 @@
         draw: G.art.drawSelector
       , deviceSize: U.pixels( 60 )
       , devices: [
-            {tag: 'dev:water', color: 'green'}
-          , {tag: 'dev:powder', color: 'white'}
-          , {tag: 'dev:chem', color: 'blue'}
+            {tag: 'dev:water', color: 'green', sound: 'waterfoam'}
+          , {tag: 'dev:powder', color: 'white', sound: 'drypowder'}
+          , {tag: 'dev:chem', color: 'blue', sound: 'drychem'}
         ]
       , selected: 0
       , behavior: [

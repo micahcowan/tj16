@@ -9,6 +9,18 @@ addEventListener('load', function(){
     }
     var Sp = G.sprites;
 
+    var sounds = [
+        'bullet'
+      , 'drychem'
+      , 'drypowder'
+      , 'fwoosh'
+      , 'waterfoam'
+    ];
+    for (var i=0; i != sounds.length; ++i) {
+        var s = sounds[i];
+        createjs.Sound.registerSound('sounds/' + s + '.mp3', s);
+    }
+
     function newGame() {
         var S = G.state = { };
         S.area = {

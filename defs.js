@@ -257,11 +257,21 @@
             select = true;
         }
         mk.onDown(keys, handler);
+        var playing;
+        function donePlaying() {
+            playing = false;
+        }
+        function play(s) {
+            var inst = createjs.Sound.play(s);
+            playing = true;
+            inst.on('complete', donePlaying);
+        }
         var retval = function(delta) {
             if (select) {
-                console.log("called");
-                this.selected = (this.selected + 1) % this.devices.length;
                 select = false;
+                if (playing) return;
+                this.selected = (this.selected + 1) % this.devices.length;
+                play(this.devices[this.selected].sound);
             }
         };
         retval.destroy = mk.destroy.bind(mk);

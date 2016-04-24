@@ -73,7 +73,8 @@
         s.strokeRect(-w/2, -h/2, w, h);
         s.restore(); */
 
-        drawImageAt(this, s, 'dev:water');
+        var sel = G.state.selector;
+        drawImageAt(this, s, sel.devices[sel.selected].tag);
     }
 
     G.art.drawSelector = function(s) {
