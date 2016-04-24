@@ -22,6 +22,7 @@ addEventListener('load', function(){
         S.camera = new G.Camera(S.center.x, S.center.y);
         S.background = new Sp.Background;
         S.player = new Sp.Player({x: S.center.x, y: S.center.y});
+        S.selector = new Sp.DeviceSelector;
         MG.resetSprites(
             S.camera
           , S.background
@@ -55,8 +56,8 @@ addEventListener('load', function(){
               , hRadius: U.pixels( 50 )
               , randomSpriteFrames: false
             })
-            // Sparky:
           , S.player
+          , S.selector
         );
     }
 

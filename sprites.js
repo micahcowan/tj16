@@ -36,6 +36,7 @@
         height: 80
       , width: 80
       , draw: G.art.drawPlayer
+      , scale: 80/96
       , initSprite: function(config) {
             this.mergeData(config);
             var bounds = {
@@ -85,5 +86,16 @@
             Bh.momentum
           , GBh.particleFade
         ]
+    });
+
+    sprites.DeviceSelector = MG.makeSpriteClass({
+        draw: G.art.drawSelector
+      , deviceSize: U.pixels( 60 )
+      , devices: [
+            {tag: 'dev:water', color: 'green'}
+          , {tag: 'dev:powder', color: 'white'}
+          , {tag: 'dev:chem', color: 'blue'}
+        ]
+      , selected: 0
     });
 })();

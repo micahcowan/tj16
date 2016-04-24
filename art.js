@@ -9,6 +9,8 @@
         var manifest = [
             {id: 'bkgnd', src: 'images/background.png'}
           , {id: 'dev:water', src: 'images/extinguisher_water_and_foam.png'}
+          , {id: 'dev:powder', src: 'images/extinguisher_dry_powder.png'}
+          , {id: 'dev:chem', src: 'images/extinguisher_dry_chemical.png'}
         ];
 
         G.art.magnesia = [];
@@ -72,5 +74,80 @@
         s.restore(); */
 
         drawImageAt(this, s, 'dev:water');
+    }
+
+    G.art.drawSelector = function(s) {
+        var ds = this.devices;
+        var gfx = this.devices.map(
+            function(d) {
+                return G.queue.getResult(d.tag);
+            }
+        );
+        var devSz = this.deviceSize.as( U.pixels );
+
+        // Dimensions of panel
+        var padding = 18;
+        var cornerRad = padding; // 9;
+        var h = devSz + padding;
+        var t = G.game.height - h;
+        var w = ds.length * devSz + ds.length * padding;
+        var l = G.game.width - w;
+
+        // device rectangle padding
+        var drp = 8;
+
+        // *** Fill path ***
+        s.beginPath();
+        // main rect
+        s.rect(l, t, w, h);
+        // left rect
+        s.rect(l - padding, t, padding, h);
+        // right rect
+        s.rect(l, t - padding, w, padding);
+        // corner
+        //s.arc(l, t, cornerRad, pi, 3*pi/2);
+        s.arc(l, t, cornerRad, 0, 2*Math.PI);
+
+        s.globalAlpha = 0.5;
+        s.fillStyle = 'white';
+        s.fill();
+
+        for (var i=0; i != gfx.length; ++i) {
+            l = G.gm.width - (padding * (i+1) + devSz * (i+1));
+            w = devSz;
+            h = devSz;
+            var g = gfx[i];
+            if (g.width > g.height) {
+                h = g.height * (w / g.width);
+            }
+            else {
+                w = g.width * (h / g.height);
+            }
+
+            // opaque?
+            if (this.selected == i) {
+                var savedAlpha = s.globalAlpha;
+                s.globalAlpha = 1;
+            }
+
+            s.beginPath();
+            s.rect(l + drp, t + drp, devSz - 2*drp, devSz - 2*drp);
+            s.fillStyle = ds[i].color;
+            s.strokeStyle = '#222';
+            s.lineWidth = 1;
+            s.fill();
+            //s.stroke();
+
+            s.drawImage(g, l, t, w, h);
+
+            // unopaque?
+            if (this.selected == i) {
+                var p = 4;
+                s.strokeRect(l-p, t-p, devSz+2*p, devSz+2*p);
+                s.globalAlpha = savedAlpha;
+            }
+        }
+
+        s.globalAlpha = 1;
     }
 })();
