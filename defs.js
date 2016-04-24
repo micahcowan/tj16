@@ -186,13 +186,31 @@
     // (not a behavior, util function for fadeSpriteFrames)
     function getNextSprite() {
         var len = this.numSpriteFrames;
-        if (!this.randomSpriteFrames)
+        if (false && !this.randomSpriteFrames)
             return (this.curSprite + 1) % len;
         else {
-            // Avoid the same sprite
-            var ret = Math.floor( Math.random() * (len-1) );
-            if (ret >= this.curSprite) ++ret;
+            var ret = this.shuffledFrames.shift();
+            if (this.shuffledFrames.length == 0)
+                shuffleFrames.call(this);
             return ret;
+        }
+    }
+
+    // (not a behavior, util function for fadeSpriteFrames)
+    function shuffleFrames() {
+        var list = [];
+        for (var i=0; i < this.numSpriteFrames; ++i) {
+            list.push(i);
+        }
+        // shuffle
+        this.shuffledFrames = [];
+        while (list.length > 0) {
+            this.shuffledFrames.push(
+                list.splice(
+                    Math.floor( Math.random() * list.length ),
+                    1
+                )[0]
+            );
         }
     }
     
@@ -203,7 +221,10 @@
         // init
         if (!('fadeAmt' in this)) {
             this.fadeAmt = U.units( 0 ).relax();
-            this.curSprite = Math.floor( Math.random() * this.numSpriteFrames );
+            var nums
+
+            shuffleFrames.call(this);
+            this.curSprite = getNextSprite.call(this);
             this.nextSprite = getNextSprite.call(this);
         }
         this.fadeAmt = this.fadeAmt.add( this.fadeRate.mul(delta) ).relax();

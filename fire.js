@@ -40,7 +40,7 @@ addEventListener('load', function(){
               , spriteFrames: G.art.infantry
               , scale: 0.12
               , hRadius: U.pixels( 50 )
-              , randomSpriteFrames: true
+              , randomSpriteFrames: false
             })
           , S.player
         );
