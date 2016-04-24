@@ -112,6 +112,10 @@ var MajicKeys = function() {
             keys.push(' ');
             keys.push('Space');
         }
+        else if (key == 'Tab' || key == '\t') {
+            keys.push('Tab');
+            keys.push('\t');
+        }
         else if (key == 'Up' || key == 'Down' || key == 'Left'
                  || key == 'Right') {
             keys.push('Arrow' + key);

@@ -247,4 +247,24 @@
 
     GBh.particleFade = function(delta) {
     };
+
+    // rotateKeys and thrustKeys have too much in common. Farm
+    // it out (probably mostly into MajicKeys?)
+    GBh.selectKey = function(keys) {
+        var mk = new MajicKeys;
+        var select;
+        function handler() {
+            select = true;
+        }
+        mk.onDown(keys, handler);
+        var retval = function(delta) {
+            if (select) {
+                console.log("called");
+                this.selected = (this.selected + 1) % this.devices.length;
+                select = false;
+            }
+        };
+        retval.destroy = mk.destroy.bind(mk);
+        return retval;
+    }
 })();

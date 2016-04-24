@@ -97,5 +97,8 @@
           , {tag: 'dev:chem', color: 'blue'}
         ]
       , selected: 0
+      , behavior: [
+            GBh.selectKey('Tab')
+        ]
     });
 })();
