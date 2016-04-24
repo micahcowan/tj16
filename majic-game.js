@@ -277,7 +277,7 @@ var MajicGame = (function() {
                     if (exceed.x != 0)
                         this.h = U.pixels( 0 ).per.second.relax();
                     if (exceed.y != 0)
-                        this.y = U.pixels( 0 ).per.second.relax();
+                        this.v = U.pixels( 0 ).per.second.relax();
                 }
                 return MajicGame.behavior.bounds(rect, handler);
             }

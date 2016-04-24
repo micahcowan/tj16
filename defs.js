@@ -48,7 +48,7 @@
         }
     };
     // Tighter rect for player in camera
-    var cameraPadding = U.pixels( 80 );
+    var cameraPadding = U.pixels( 160 );
     G.playerCameraRect = {
         get t() {
             return G.cameraRect.t.add(cameraPadding).relax();
@@ -174,7 +174,7 @@
                 }
             )
           // bounds check for camera in gameplay area
-          // , boundsCheck // (defined above)
+           , boundsCheck // (defined above)
         ];
     };
     G.Camera.prototype = MG.spritePrototype;
