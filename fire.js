@@ -84,7 +84,7 @@ addEventListener('load', function(){
         );
     }
 
-    var queue = G.queue = new createjs.LoadQueue();
+    var queue = G.queue = new createjs.LoadQueue(false);
     queue.on('complete', function() { newGame(); MG.start(); });
     //queue.on('fileerror', function(e){  console.log("error: " + e.toString()); debugger; })
     G.art.load(queue);
